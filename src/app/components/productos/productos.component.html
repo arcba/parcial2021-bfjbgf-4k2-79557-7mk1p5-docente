@@ -1,0 +1,87 @@
+<div *ngIf="mostrar == false">
+<h4>Parcial 4k2 79557 Roberto Madrid</h4>
+<h2>Consulta de productos</h2>
+
+<button type="button" class="btn btn-outline-primary" (click)="Agregar()">
+<span class="fas fa-plus"> </span> Agregar
+</button>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th class="text-center">ID Producto</th>
+      <th class="text-center">Nombre</th>
+      <th class="text-center">Stock</th>
+      <th class="text-center">Fecha de alta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dto of Lista">
+      <td class="text-center">{{dto.ProductoID}}</td>
+      <td class="text-center">{{dto.ProductoNombre}}</td>
+      <td class="text-center">{{dto.ProductoStock}}</td>
+      <td class="text-center">{{dto.ProductoFechaAlta | date: "dd/MM/yyyy"}}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="row justify-content-center pb-3">
+<button type="button" class="btn btn-primary" (click)="Agregar()">
+        <span class="fas fa-plus-circle"> </span> Agregar
+    </button>
+</div>
+</div>
+<div *ngIf="mostrar == true">
+<h2>Agregar Producto</h2>
+<form name="FormReg" [formGroup]='FormReg' class="bg-light">
+  <div class="form-group row pb-3">
+    <label class="col-form-label col-sm-2 col-sm-offset-2" for="ProductoNombre">Nombre <span
+                  class="text-danger">*</span></label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" formControlName="ProductoNombre"
+       [ngClass]="{'is-invalid': (FormReg.controls.ProductoNombre.touched )  
+          && FormReg.controls.ProductoNombre.errors}" />
+      <span class="text-danger" *ngIf="(FormReg.controls.ProductoNombre.touched ) 
+                      && FormReg.controls.ProductoNombre.errors?.required">
+                  Dato requerido.
+              </span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2 col-sm-offset-2" for="ProductoStock">Stock del producto<span
+                  class="text-danger">*</span></label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" formControlName="ProductoStock"
+       [ngClass]="{'is-invalid': (FormReg.controls.ProductoStock.touched )  
+          && FormReg.controls.ProductoStock.errors}" />
+      <span class="text-danger" *ngIf="(FormReg.controls.ProductoStock.touched) 
+                      && FormReg.controls.ProductoStock.errors?.required">
+                  Dato requerido.
+              </span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2 col-sm-offset-2" for="ProductoFechaAlta">Fecha de alta del producto<span
+                  class="text-danger">*</span></label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" formControlName="ProductoFechaAlta"
+       [ngClass]="{'is-invalid': (FormReg.controls.ProductoFechaAlta.touched )  
+          && FormReg.controls.ProductoFechaAlta.errors}" />
+      <span class="text-danger" *ngIf="(FormReg.controls.ProductoFechaAlta.touched) 
+                      && FormReg.controls.ProductoFechaAlta.errors?.required">
+                  Dato requerido.
+              </span>
+      <span class="text-danger" *ngIf="(FormReg.controls.ProductoFechaAlta.touched) && FormReg.controls.ProductoFechaAlta.errors?.pattern">
+              Ingresar formato fecha (dd/mm/aaaa).
+            </span>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <button type="button" class="btn btn-primary" (click)="Guardar()">
+          <span class="fas fa-pencil-alt"></span> Guardar
+      </button>
+    &nbsp;
+    <button type="button" class="btn btn-warning" (click)="Cancelar()">
+         <span class="fas fa-undo"></span> {{'Cancelar'}}
+      </button>
+  </div>
+</form>
+</div>
